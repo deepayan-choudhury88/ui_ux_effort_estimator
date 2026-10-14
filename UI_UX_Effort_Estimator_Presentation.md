@@ -129,7 +129,28 @@ Example: **Data table**: Simple 4 h, Medium 12 h, Complex 24 h.
 
 The AI reduction (30%), technology factor (1.0), hours per day (8) and hours per week (40) are all on the **Assumptions** sheet.
 
-### 2.9 Status of the numbers (say this clearly)
+### 2.9 The technology factor
+
+**What it is:** one number on the Assumptions sheet that scales the whole estimate up or down for the technology stack the project will use.
+
+- **1.00 (default)** = the baseline stack the hours were written for: Next.js / React with TypeScript and an established component library (for example MUI, Ant Design or shadcn/ui).
+- **Above 1.00** for stacks that need more hand-built work. Example: 1.25 if most components have to be built by hand instead of coming from a library.
+- **Below 1.00** is possible if a project can reuse a lot, but only if the team agrees a justification.
+
+**How it is applied:** Total = (A + B + C) x technology factor. It is a single multiplier on the total, so it applies equally to pages, shared components and APIs.
+
+**Worked example** (sample project, 978 h at factor 1.00):
+
+| Factor | Without AI | With AI |
+|---|---|---|
+| 1.00 | 978 h | about 685 h |
+| 1.25 | about 1,223 h | about 856 h |
+
+**Why it exists:** the hours in the catalogue assume one baseline stack. Without the factor, estimators would either change catalogue hours per bid (breaking consistency) or ignore the stack difference.
+
+**Status:** like the hours, the factor values are for the team to agree. Only 1.00 is defined today, and 1.25 is just an illustration. We should agree a short list (for example baseline, partly hand-built, fully custom) and what each one means.
+
+### 2.10 Status of the numbers (say this clearly)
 
 - **Hours are DRAFT starting values.** They exist so the model is complete. The team replaces them with experience-based hours.
 - **The 30% AI reduction is a placeholder** pending a figure validated by delivery teams.
@@ -206,11 +227,16 @@ Go to **Complexity Rubric**.
 
 (Optional) Change one catalogue hour, switch back to the Estimator to show the total move, then undo.
 
-#### Step 6 - Assumptions (1 min)
+#### Step 6 - Assumptions (2 min)
 
 Go to **Assumptions**.
-- Show the AI reduction (30%, placeholder), technology factor, hours per day / week, and the baseline assumptions (Next.js / React with TypeScript, REST APIs, unit tests included).
+- Show the AI reduction (30%, placeholder), hours per day / week, and the baseline assumptions (Next.js / React with TypeScript, REST APIs, unit tests included).
 - Show the calibration log.
+- **Technology factor (live):**
+  - Explain: "The hours assume a baseline stack: Next.js / React with a component library. If a project needs more hand-built UI, we raise this multiplier instead of editing every component."
+  - Change it from **1.00 to 1.25**, return to the Estimator, and show the total move from **978 h to about 1,223 h** (with AI about 685 h to about 856 h).
+  - Set it back to 1.00.
+  - Say: "Only 1.00 is defined today. We need to agree which values to offer and what each means."
 
 ### Demo recovery tips
 
@@ -243,3 +269,4 @@ Go to **Assumptions**.
 | Does it give a range? | Not in v1. A range can be added once we have calibration data. |
 | How does it differ from the earlier two files? | It keeps their component and complexity idea and adds a written rubric, backend APIs and page templates. |
 | Does it cover agent development? | No. Only the UI and API layer that talk to agents. A separate estimator can be added. |
+| What is the technology factor? | A single multiplier on the total for the stack used. 1.00 is the baseline (Next.js / React with a component library). Raise it when more has to be hand-built. The values still need to be agreed by the team. |
