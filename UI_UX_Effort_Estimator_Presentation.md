@@ -162,7 +162,8 @@ Go to **Estimator**. The sample is the example from the earlier call: 1 login, 3
 1. **Section A**: show the page types, the Simple / Medium / Complex columns, and the hours per level.
 2. **Section B**: show the shared items (App shell, Sidebar, Top header, Theme, Toast, Role-based UI) and the dropdowns.
 3. **Section C**: show APIs (CRUD, List / search, Aggregation, Authentication, RBAC).
-4. **Summary at the top**:
+4. **Page Explorer** (just below Section A): pick a page type and a level from the two dropdowns. It lists every component in that page, with quantity, hours and what the component looks like at that level. The total ties back to the hours per page used in Section A.
+5. **Summary at the top**:
 
 | Item | Without AI | With AI |
 |---|---|---|
@@ -197,10 +198,11 @@ Go to **Complexity Rubric**.
 
 #### Step 5 - Where the hours come from (3 min)
 
-1. **Page Templates**: pick "Dashboard / analytics". Show the definitions for Simple, Medium and Complex, the typical APIs, and the hours per level.
-2. **Page Bundles**: find the Dashboard rows. Show it is a recipe of components, each with a quantity and level.
-3. **Component Catalogue**: find one of those components. Show its definitions and hours.
-4. Say: "Change a number here, and every page that uses this component updates."
+1. **Page Explorer** on the Estimator: choose "Login & authentication page", then Medium. It shows Login screen (Medium) 12 h, Password reset (Simple) 6 h and Session handling (Simple) 4 h, which total 22 h. Switch to Dashboard / analytics page, Complex, to show 252 h. This answers "where does the page number come from?" without leaving the sheet.
+2. **Page Templates**: pick "Dashboard / analytics". Show the definitions for Simple, Medium and Complex, the typical APIs, and the hours per level.
+3. **Page Bundles**: find the Dashboard rows. Show it is a recipe of components, each with a quantity and level.
+4. **Component Catalogue**: find one of those components. Show its definitions and hours.
+5. Say: "Change a number here, and every page that uses this component updates."
 
 (Optional) Change one catalogue hour, switch back to the Estimator to show the total move, then undo.
 
