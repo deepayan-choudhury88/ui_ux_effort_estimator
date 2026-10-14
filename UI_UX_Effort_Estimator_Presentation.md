@@ -23,13 +23,14 @@ Workbook: `UI_UX_Effort_Estimator.xlsx` (Draft v0.1)
 
 A single Excel workbook that turns an RFP's wording ("1 login page, 3 analytics dashboards, 4 admin pages, 5 APIs...") into a total effort in hours, person-days and weeks.
 
-It builds on the two earlier versions and adds three things:
+It was built from the requirements discussed on the call, and its main features are:
 
-| Addition | Why it matters |
+| Feature | Why it matters |
 |---|---|
-| A written **Complexity Rubric** | Two people reading the same RFP choose the same level |
+| A written **Complexity Rubric** and a **Complexity Advisor** | Two people reading the same RFP choose the same level, and the Advisor shows the reasoning |
 | **Backend APIs** as first-class items | UI work is never estimated without the APIs behind it |
-| **Page Templates** built from components | Estimators start from "a dashboard page", not from 60 loose components |
+| **Page Templates** built from components, with a **Page Explorer** | Estimators start from "a dashboard page", not from 60 loose components, and can see exactly what is inside every page |
+| **Summary & Scenarios** sheet | A one-page view for sales and clients, with the top hour drivers and a baseline versus AI versus what-if comparison |
 
 ### 1.3 Who uses it
 
@@ -78,11 +79,13 @@ The key idea: **hours live in exactly one place** (the Component Catalogue). Pag
 |---|---|---|---|
 | 1 | **Read Me** | Purpose, personas, scope, 5-step instructions, colour guide | Nobody |
 | 2 | **Estimator** | The working sheet: inputs and the summary | Estimator |
-| 3 | **Complexity Rubric** | Rules for choosing Simple / Medium / Complex | Reviewers |
-| 4 | **Component Catalogue** | 63 components with definitions and hours per level | Developers |
-| 5 | **Page Templates** | 11 page types with definitions and hours per level | Calculated |
-| 6 | **Page Bundles** | The recipe: which components make up each page | Developers |
-| 7 | **Assumptions** | AI reduction, technology factor, hours per day / week, baseline assumptions | Team |
+| 3 | **Summary** | One-page view: headline, where the hours go, top page drivers, scenarios | Calculated (only the what-if cells are inputs) |
+| 4 | **Complexity Advisor** | Answer 7 questions, get a recommended level with the reason and hours | Estimator |
+| 5 | **Complexity Rubric** | Rules for choosing Simple / Medium / Complex | Reviewers |
+| 6 | **Component Catalogue** | 63 components with definitions and hours per level | Developers |
+| 7 | **Page Templates** | 11 page types with definitions and hours per level | Calculated |
+| 8 | **Page Bundles** | The recipe: which components make up each page | Developers |
+| 9 | **Assumptions** | AI reduction, technology factor, hours per day / week, baseline assumptions | Team |
 
 ### 2.3 Colour guide
 
@@ -168,7 +171,7 @@ The AI reduction (30%), technology factor (1.0), hours per day (8) and hours per
 - [ ] Share your screen with the workbook at 100% zoom or larger.
 - [ ] Do not save changes made during the demo (or use Save As).
 
-### Demo flow (about 15 minutes)
+### Demo flow (about 20 minutes)
 
 #### Step 1 - Read Me (2 min)
 
@@ -211,11 +214,17 @@ Say: "The sample inputs are placeholders. Anyone can overwrite the yellow cells.
 - Say: "The RFP wants an AI assistant. One dropdown selection adds it."
 - Remove it afterwards.
 
-#### Step 4 - The Complexity Rubric (2 min)
+#### Step 4 - The Complexity Rubric and Advisor (4 min)
 
-Go to **Complexity Rubric**.
+Go to **Complexity Advisor** first.
+- The sample item is a "Sales performance dashboard". Six dimensions are set to Medium and **Data source** is set to "Live data (polling, websocket)".
+- Result: **Complex**, driven by Data source, and it shows **252 h** for one Dashboard page. This is the "highest trigger wins" rule in action.
+- Live change: set Data source to "Static / hard-coded data...". The result drops to **Medium**.
+- Say: "The Advisor does not change the Estimator. It tells you which level to use, so two estimators reach the same answer."
+
+Then go to **Complexity Rubric**.
 - Show the dimensions and the rules: **highest trigger wins**, **default to Medium**.
-- Say: "This is what makes the estimate repeatable across people."
+- Say: "The Advisor is just this table turned into questions."
 
 #### Step 5 - Where the hours come from (3 min)
 
@@ -227,7 +236,15 @@ Go to **Complexity Rubric**.
 
 (Optional) Change one catalogue hour, switch back to the Estimator to show the total move, then undo.
 
-#### Step 6 - Assumptions (2 min)
+#### Step 6 - Summary and scenarios (3 min)
+
+Go to **Summary**.
+- **Headline and where the hours go:** 978 h total, with UI pages about 76%, shared components about 6% and APIs about 18%. Two charts show the same information.
+- **Top 5 UI page drivers:** Dashboard (400 h) and Admin (317 h) make up most of the UI effort. Say: "This tells a client or sales lead where to look if they want to reduce scope."
+- **Scenario comparison:** Baseline (no AI, factor 1.00) is 978 h, Current settings (30% AI) is about 685 h, and What-if (factor 1.25, 30% AI) is about 856 h.
+- Live change: in the What-if column set the technology factor to 1.5. The What-if total updates, and so does the chart.
+
+#### Step 7 - Assumptions (2 min)
 
 Go to **Assumptions**.
 - Show the AI reduction (30%, placeholder), hours per day / week, and the baseline assumptions (Next.js / React with TypeScript, REST APIs, unit tests included).
@@ -253,7 +270,7 @@ Go to **Assumptions**.
 1. **Review the component list**: anything missing or redundant?
 2. **Review the definitions** of Simple / Medium / Complex per component.
 3. **Replace the draft hours** with your experience-based numbers (generic, not person-specific).
-4. **Agree what to keep, change or add** across the three versions, to form one baseline.
+4. **Agree what to keep, change or add**, to form one agreed baseline.
 5. **Decide on follow-ups**: agent-development estimator, range output, back-testing against past projects.
 
 ---
@@ -267,6 +284,6 @@ Go to **Assumptions**.
 | Can we add a component? | Yes. Add a row in the Component Catalogue (lookups cover up to row 150). |
 | Is the AI percentage reliable? | No, 30% is a placeholder until delivery teams validate a figure. |
 | Does it give a range? | Not in v1. A range can be added once we have calibration data. |
-| How does it differ from the earlier two files? | It keeps their component and complexity idea and adds a written rubric, backend APIs and page templates. |
+| What makes this approach different? | It estimates from RFP wording: page-first, with a written rubric, a Complexity Advisor, backend APIs as estimable items, a Page Explorer that shows what is inside every page, and a Summary with scenarios. |
 | Does it cover agent development? | No. Only the UI and API layer that talk to agents. A separate estimator can be added. |
 | What is the technology factor? | A single multiplier on the total for the stack used. 1.00 is the baseline (Next.js / React with a component library). Raise it when more has to be hand-built. The values still need to be agreed by the team. |
